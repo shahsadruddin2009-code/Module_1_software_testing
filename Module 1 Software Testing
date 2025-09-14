@@ -1,0 +1,36 @@
+destinations = {
+   "Bali": 3,
+   "Tokyo": 0,
+   "Paris": 2
+}
+def check_availability(destination):
+   if destination not in destinations:
+       return "Destination not found"
+   elif destinations[destination] < 0:
+       return "No spots available"
+   else:
+       return f"{destinations[destination]} spots available"
+
+def book_trip(destination, user):
+    if destinations.get(destination, 0) <= 0:
+       return "Booking failed. No availability."
+    if not user:
+       return "Invalid user"
+    destinations[destination] -= 1
+    return confirm_booking(destination, user)
+
+def confirm_booking(dest, user):
+   message = f"Booking confirmed for {user} to {dest}!"
+   return message
+
+def run_booking(user, location):
+  print("Checking availability...")
+  available = check_availability(location)
+  print(available)
+  result = book_trip(destination=location, user=user)
+  print(result)
+
+print(" ")
+user = input("Enter your Name: ").title()
+location = input("Enter your Destination: ").title()
+run_booking(user, location)
